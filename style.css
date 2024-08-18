@@ -1,17 +1,29 @@
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+const fill=document.querySelector('.fill') const empties=document.querySelectorAll('.empty') fill.addEventListener('dragstart', dragStart) fill.addEventListener('dragend', dragEnd) for(const empty of empties) {
+  empty.addEventListener('dragover', dragOver) empty.addEventListener('dragenter', dragEnter) empty.addEventListener('dragleave', dragLeave) empty.addEventListener('drop', dragDrop)
 }
 
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
+function dragStart() {
+  this.className+=' hold'
+  setTimeout(()=> this.className='invisible', 0)
+}
 
-body {
-  font-family: "Roboto", sans-serif;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100vh;
-  overflow: hidden;
+function dragEnd() {
+  this.className='fill'
+}
+
+function dragOver(e) {
+  e.preventDefault()
+}
+
+function dragEnter(e) {
+  e.preventDefault() this.className+=' hovered'
+}
+
+function dragLeave() {
+  this.className='empty'
+}
+
+function dragDrop() {
+  this.className='empty'
+  this.append(fill)
 }
