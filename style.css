@@ -1,29 +1,44 @@
-const fill=document.querySelector('.fill') const empties=document.querySelectorAll('.empty') fill.addEventListener('dragstart', dragStart) fill.addEventListener('dragend', dragEnd) for(const empty of empties) {
-  empty.addEventListener('dragover', dragOver) empty.addEventListener('dragenter', dragEnter) empty.addEventListener('dragleave', dragLeave) empty.addEventListener('drop', dragDrop)
+* {
+  box-sizing: border-box;
 }
 
-function dragStart() {
-  this.className+=' hold'
-  setTimeout(()=> this.className='invisible', 0)
+body {
+  background-color: steelblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
 }
 
-function dragEnd() {
-  this.className='fill'
+.empty {
+  height: 150px;
+  width: 150px;
+  margin: 10px;
+  border: solid 3px black;
+  background: white;
 }
 
-function dragOver(e) {
-  e.preventDefault()
+.fill {
+  background-image: url('https://source.unsplash.com/random/150x150');
+  height: 145px;
+  width: 145px;
+  cursor: pointer;
 }
 
-function dragEnter(e) {
-  e.preventDefault() this.className+=' hovered'
+.hold {
+  border: solid 5px #ccc;
 }
 
-function dragLeave() {
-  this.className='empty'
+.hovered {
+  background-color: #333;
+  border-color: white;
+  border-style: dashed;
 }
 
-function dragDrop() {
-  this.className='empty'
-  this.append(fill)
+@media (max-width: 800px) {
+  body {
+    flex-direction: column;
+  }
 }
